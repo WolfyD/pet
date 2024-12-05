@@ -1,0 +1,25 @@
+name: FTP Deploy
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch (change if needed)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Upload files via FTP
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./  # Directory to upload (use './' for root of the repo)
+          server-dir: /domains/dev.pet.martonradics.nl/public_html  # Remote directory on the FTP server
