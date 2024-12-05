@@ -24,6 +24,5 @@ jobs:
           local-dir: ./  # Directory to upload (use './' for root of the repo)
           server-dir: /domains/dev.martonradics.nl/public_html/  # Remote directory on the FTP server
           timeout: 60
-          passive: true
           excludes: |
            **/.htaccess
