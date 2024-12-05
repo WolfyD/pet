@@ -27,3 +27,4 @@ jobs:
            **/.htaccess
            **/.git*
            **/.git/**
+           .github/workflows/deploy.yml
