@@ -28,4 +28,4 @@ jobs:
           cleanup: false # optional, remove existing files inside FTP remote folder
           include: '["*"]' # optional, e.g. '['dist']'
           exclude: '["**/.htaccess", "**/.git*", "**/.git/**", ".github/**"]' # optional, e.g. '['node_modules/**', '.git/**', '*.env']'
-          passive: true # optional
+          passive: false # optional
