@@ -1,25 +1,16 @@
-name: FTP Deploy
-
-on:
-  push:
-    branches:
-      - main
-
+name: Deploy via ftp
+on: push
 jobs:
-  ftp-deploy:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Deploy via FTP
-        uses: appleboy/ftp-action@master
-        with:
-          host: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
-          protocol: ftp  # Can be ftp, ftps, or sftp
-          local-dir: ./  # Local directory to upload
-          remote-dir: /public_html/dev/
+    - uses: actions/checkout@v2
+    - name: Upload ftp
+      uses: sebastianpopp/ftp-action@releases/v2
+      with:
+        host: ${{ secrets.FTP_SERVER }}
+        user: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        localDir: "./"
+        remoteDir: "/public_html/dev/"
