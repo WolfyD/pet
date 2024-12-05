@@ -1,4 +1,4 @@
-name: Deploy via FTP
+name: FTP Deploy
 
 on:
   push:
@@ -10,14 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: FTP Deploy
-        uses: lukka/ftp-deploy-action@v1
+      - name: Deploy via FTP
+        uses: appleboy/ftp-action@master
         with:
-          server: ${{ secrets.FTP_HOST }}
+          host: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-source-path: ./  # Local directory to upload
-          server-destination-path: /public_html/dev/
+          port: 21
+          protocol: ftp  # Can be ftp, ftps, or sftp
+          local-dir: ./  # Local directory to upload
+          remote-dir: /public_html/dev/
