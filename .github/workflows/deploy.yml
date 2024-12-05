@@ -25,3 +25,5 @@ jobs:
           server-dir: /dev/  # Remote directory on the FTP server
           exclude: |
            **/.htaccess
+           **/.git*
+           **/.git/**
