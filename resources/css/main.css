@@ -1,0 +1,214 @@
+/* Color Palette */
+/*
+:root {
+    
+    --background-color: #fdf6f0;
+    --header-color: #f7e4d7;
+    --form-bg-color: #ffffff;
+    --form-border-color: #e0d5c9;
+    --button-color: #f4a261;
+    --button-hover-color: #e68c4d;
+    --text-color: #5c5c5c;
+    --input-bg-color: #f9f4f0;
+    --input-border-color: #cfc3b6;
+    --paw-print-color: rgba(107, 142, 173, 0.1);
+}
+*/
+
+.message-container {
+    background-color: var(--form-border-color); /* Use the border color for subtle emphasis */
+    border-left: 4px solid var(--button-color); /* Highlight with a button-colored accent */
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--text-color); /* Ensure it matches the theme */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.message-container.error {
+    border-left-color: var(--error-color);
+    background-color: var(--error-color-background);
+    color: var(--error-color);
+}
+
+.message-container.success {
+    border-left-color: var(--success-color);
+    background-color: var(--success-color-background);
+    color: var(--success-color);
+}
+
+.message-text {
+    margin: 0;
+    padding: 0;
+    white-space: pre-wrap;
+}
+
+a{
+    color: var(--link-color);
+    
+}
+
+a:visited{
+    color: var(--link-color-visited);
+}
+
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Login Container */
+.login-container {
+    width: 35%;
+    background: var(--form-bg-color);
+    border: 1px solid var(--form-border-color);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+/* Paw Print Background */
+.login-container::before {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 190px;
+    height: 190px;
+    background-image: url('../images/paw_rot_30.png'); /* Your paw print image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: var(--paw-print-color);
+    z-index: 0;
+}
+
+.transparent_input{
+    background-image: url("../images/paw_rot_30_blur.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position-x: -61px;
+    background-position-y: -15px;
+}
+
+/* Header */
+.login-header {
+    background-color: var(--header-color);
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.login-logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.login-header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--text-color);
+}
+
+/* Main Section */
+.login-main {
+    position: relative;
+    z-index: 1;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form Groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+input {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+}
+
+
+input:focus {
+    outline: none;
+    border-color: var(--button-color);
+    box-shadow: 0 0 5px var(--button-color);
+}
+
+/* Submit Button */
+.btn-submit {
+    background-color: var(--button-color);
+    color: #fff;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: var(--button-hover-color);
+}
+
+#form_functions{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.f_function{
+    display: inline-flex;
+    gap: 10px;
+    font-size: .8em;
+    align-self: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .login-container {
+        width: 90%;
+        margin: 0 20px;
+    }
+
+    .login-header h1 {
+        font-size: 1.4rem;
+    }
+
+    .btn-submit {
+        font-size: 0.9rem;
+    }
+}

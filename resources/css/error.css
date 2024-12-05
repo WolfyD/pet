@@ -1,0 +1,72 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Header Styling */
+header {
+    background-color: #dc3545; /* Red to indicate an error */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 2em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Error Container */
+#errorContainer {
+    margin: 50px auto;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+    padding: 20px;
+    border: 2px solid #dc3545; /* Matches the header for consistency */
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Error Border */
+#errorBorder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: -10px;
+    border: 5px solid #f5c6cb; /* Light red border */
+    border-radius: 15px;
+    z-index: -1;
+}
+
+/* Error Message Styling */
+#errorMessage {
+    font-size: 1.2em;
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* Add Responsiveness */
+@media (max-width: 768px) {
+    header {
+        font-size: 1.5em;
+        padding: 15px;
+    }
+
+    #errorContainer {
+        margin: 30px auto;
+        padding: 15px;
+    }
+
+    #errorMessage {
+        font-size: 1em;
+    }
+}
