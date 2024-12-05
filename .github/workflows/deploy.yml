@@ -1,4 +1,4 @@
-name: FTP Deploy
+name: Deploy via FTP
 
 on:
   push:
@@ -6,18 +6,18 @@ on:
       - main
 
 jobs:
-  deploy:
+  ftp-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy via FTP
-        uses: marketplace/actions-ftp@master
+      - name: FTP Deploy
+        uses: lukka/ftp-deploy-action@v1
         with:
-          ftp-server: ${{ secrets.FTP_HOST }}
-          ftp-username: ${{ secrets.FTP_USERNAME }}
-          ftp-password: ${{ secrets.FTP_PASSWORD }}
-          local-source-path: ./  # Directory to upload
-          remote-destination-path: /public_html/dev/
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-source-path: ./  # Local directory to upload
+          server-destination-path: /public_html/dev/
