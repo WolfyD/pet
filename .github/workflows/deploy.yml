@@ -22,7 +22,8 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./  # Directory to upload (use './' for root of the repo)
-          server-dir: /domains/dev.pet.martonradics.nl/public_html/  # Remote directory on the FTP server
+          server-dir: /domains/dev.martonradics.nl/public_html/  # Remote directory on the FTP server
+          timeout: 60
           passive: true
           excludes: |
-            .htaccess
+           */.htaccess
