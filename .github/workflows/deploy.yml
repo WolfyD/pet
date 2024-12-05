@@ -23,3 +23,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./  # Directory to upload (use './' for root of the repo)
           server-dir: /domains/dev.pet.martonradics.nl/public_html/  # Remote directory on the FTP server
+          passive: true
+          excludes: |
+            .htaccess
