@@ -1,16 +1,31 @@
-name: Deploy via ftp
-on: push
+name: FTP Deploy
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch (change if needed)
+
 jobs:
   deploy:
-    name: Deploy
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Upload ftp
-      uses: sebastianpopp/ftp-action@releases/v2
-      with:
-        host: ${{ secrets.FTP_SERVER }}
-        user: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        localDir: "./"
-        remoteDir: "/public_html/dev/"
+      # Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Upload files via FTP
+      - name: FTP Deployer
+        uses: sand4rt/ftp-deployer@v1.8
+        with:
+          sftp: false # optional
+          host: ${{ secrets.FTP_HOST }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
+          port: 21 # optional, default is: 21
+          username: ${{ secrets.FTP_USERNAME }} # FTP username
+          password: ${{ secrets.FTP_PASSWORD }} # FTP password
+          remote_folder: /public_html/dev/ # optional, remote path of your FTP server
+          local_folder: ./ # optional, local path, default is: dist
+          cleanup: false # optional, remove existing files inside FTP remote folder
+          include: '[]' # optional, e.g. '['dist']'
+          exclude: '[**/.htaccess, **/.git*, **/.git/**, .github/**]' # optional, e.g. '['node_modules/**', '.git/**', '*.env']'
+          passive: true # optional
