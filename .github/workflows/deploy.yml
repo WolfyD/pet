@@ -16,9 +16,9 @@ jobs:
       - name: Deploy via SFTP
         uses: danhendrickson/sftp-transfer-action@v2023.51.2
         with:
-          server: ${{ secrets.SFTP_HOST }}
+          server: ${{ secrets.FTP_HOST }}
           port: 22
-          user: ${{ secrets.SFTP_USERNAME }}
-          pass: ${{ secrets.SFTP_PASSWORD }}
+          user: ${{ secrets.FTP_USERNAME }}
+          pass: ${{ secrets.FTP_PASSWORD }}
           local-path: ./  # Path to upload
           remote-path: public_html/dev/
