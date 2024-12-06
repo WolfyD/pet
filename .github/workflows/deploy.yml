@@ -1,34 +1,27 @@
-name: FTP Deploy
+name: Deploy via SFTP
 
 on:
   push:
     branches:
-      - main  # Trigger on pushes to the main branch (change if needed)
+      - main  # Deploy on pushes to the main branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out the repository
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Upload files via FTP
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Deploy to Server via SFTP
+        uses: appleboy/ftp-action@master
         with:
-          log-level: verbose
-          server: 84.22.110.96
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          security: loose
-          timeout: 120000
-          local-dir: ./  # Directory to upload (use './' for root of the repo)
-          server-dir: public_html/dev/  # Remote directory on the FTP server
-          exclude: |
-           **/.htaccess
-           **/.git*
-           **/.git/**
-           .github/workflows/deploy.yml
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22  # SFTP default port
+          protocol: sftp  # Use SFTP instead of FTP
+          local-dir: ./  # Directory to upload (root of the repository)
+          remote-dir: public_html/dev/  # Deployment directory
+          overwrite: true  # Overwrite files on the server
+          delete: false  # Keep files on the server that are not in the repo
