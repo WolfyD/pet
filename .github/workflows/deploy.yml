@@ -1,18 +1,33 @@
-name: Deploy via git-ftp
-on: push
+name: Deploy to FTP Server
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on pushes to the main branch
+
 jobs:
   deploy:
-    name: Deploy
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Test FTP connection
-        run: |
-          ftp -inv << EOF
-          open 84.22.110.96
-          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
-          ls
-          bye
-          EOF
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Fetch full history for proper FTP syncing
+
+    - name: Install FTP client
+      run: sudo apt-get install -y ftp
+
+    - name: FTP Deploy
+      run: |
+        ftp -inv $FTP_SERVER <<EOF
+        user $FTP_USERNAME $FTP_PASSWORD
+        binary
+        cd /public_html/dev/
+        mput *
+        bye
+        EOF
+      env:
+        FTP_SERVER: ${{ secrets.FTP_SERVER }}
+        FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+        FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
