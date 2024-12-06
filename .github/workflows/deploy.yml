@@ -8,13 +8,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: git-ftp push
-        uses: sebastianpopp/git-ftp-action@releases/v3
-        with:
-          url: "ftp://84.22.110.96/public_html/dev/"
-          user: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          options: |
-            --insecure
-            --active
-          
+      - name: Initialize git-ftp
+        run: |
+          git ftp init --insecure --active -u ${{ secrets.FTP_USERNAME }} -p ${{ secrets.FTP_PASSWORD }} ftp://84.22.110.96/public_html/dev/
