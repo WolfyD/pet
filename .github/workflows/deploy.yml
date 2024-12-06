@@ -22,7 +22,8 @@ jobs:
       run: |
         ftp -inv $FTP_SERVER <<EOF
         user $FTP_USERNAME $FTP_PASSWORD
-        binary
+        quote PASV
+        type ascii
         cd /public_html/dev/
         mput *
         bye
