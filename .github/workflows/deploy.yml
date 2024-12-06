@@ -8,6 +8,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: git-ftp catchup
+      - name: Test FTP connection
         run: |
-          git ftp catchup --insecure -vv -u ${{ secrets.FTP_USERNAME }} -p ${{ secrets.FTP_PASSWORD }} ftp://84.22.110.96/public_html/dev/
+          ftp -inv << EOF
+          open 84.22.110.96
+          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+          ls
+          bye
+          EOF
