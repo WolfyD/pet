@@ -1,4 +1,4 @@
-name: Deploy to FTP Server
+name: Deploy to FTP Server via lftp
 
 on:
   push:
@@ -15,20 +15,20 @@ jobs:
       with:
         fetch-depth: 0  # Fetch full history for proper FTP syncing
 
-    - name: Install FTP client
-      run: sudo apt-get install -y ftp
+    - name: Install lftp
+      run: sudo apt-get install -y lftp
 
-    - name: FTP Deploy
+    - name: Deploy to FTP Server using lftp
       run: |
-        ftp -inv $FTP_SERVER <<EOF
-        user $FTP_USERNAME $FTP_PASSWORD
-        quote PASV
-        type ascii
-        cd /public_html/dev/
-        mput *
+        lftp -f "
+        set ftp:ssl-allow no # Disable TLS if not used
+        open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER
+        lcd ./ 
+        cd /public_html/dev/  # Remote path
+        mirror -R --parallel=10 --verbose  # Upload with parallel transfers and verbose output
         bye
-        EOF
+        "
       env:
-        FTP_SERVER: 84.22.110.96
+        FTP_SERVER: ${{ secrets.FTP_SERVER }}
         FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
         FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
