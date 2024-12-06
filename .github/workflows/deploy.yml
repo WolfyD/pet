@@ -1,25 +1,16 @@
-name: Deploy via Plain FTP (Active Mode)
-
-on:
-  push:
-    branches:
-      - main
-
+name: Deploy via git-ftp
+on: push
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: FTP Deploy
-        uses: lukaszlach/ftp-action@v1
+      - uses: actions/checkout@v3
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          remote-dir: public_html/dev/
-          local-dir: ./  # Adjust if only specific files need to be uploaded
-          passive: false  # Active mode (not passive)
-          overwrite: true  # Overwrite files on the server
+          fetch-depth: 0
+      - name: git-ftp push
+        uses: sebastianpopp/git-ftp-action@releases/v3
+        with:
+          url: "ftp://martonradics.nl/domains/martonradics.nl/public_html/dev/"
+          user: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PWD }}
