@@ -10,4 +10,4 @@ jobs:
           fetch-depth: 0
       - name: git-ftp catchup
         run: |
-          git ftp catchup --insecure --active -vv -u ${{ secrets.FTP_USERNAME }} -p ${{ secrets.FTP_PASSWORD }} ftp://84.22.110.96/public_html/dev/
+          git ftp catchup --insecure -vv -u ${{ secrets.FTP_USERNAME }} -p ${{ secrets.FTP_PASSWORD }} ftp://84.22.110.96/public_html/dev/
