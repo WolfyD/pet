@@ -22,5 +22,3 @@ jobs:
           pass: ${{ secrets.SFTP_PASSWORD }}
           local-path: ./  # Path to upload
           remote-path: public_html/dev/
-          recursive: true
-          overwrite: true
