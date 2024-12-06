@@ -12,5 +12,5 @@ jobs:
         uses: sebastianpopp/git-ftp-action@releases/v3
         with:
           url: "ftp://martonradics.nl/domains/martonradics.nl/public_html/dev/"
-          user: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PWD }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
