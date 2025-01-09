@@ -19,10 +19,11 @@
     try{
         $pdo = $conn->createConnection();
     }catch(Exception $ex){
-        ErrorHandler::displayErrorMessage("There was an issue while connecting to the database", "DB Error!");
+        ErrorHandler::displayErrorMessage("There was an issue while connecting to the database<br />[" . $ex->getMessage() . "]", "DB Error!");
     }
 
     $sql = new SqlFunctions($pdo);
+
 
     $res = $sql->checkTables();
 
